@@ -1,0 +1,21 @@
+{
+	"name": "mlisp-interpreter",
+	"version": "1.0.0",
+	"main": "dist/index.js",
+	"license": "MIT",
+	"dependencies": {
+		"@types/nearley": "^2.11.2",
+		"@types/node": "^16.11.12",
+		"nearley": "^2.20.1",
+		"typescript": "^4.5.3"
+	},
+	"devDependencies": {
+		"ts-node": "^10.4.0"
+	},
+	"scripts": {
+		"build:grammar": "yarn nearleyc src/mlisp.ne -o src/mlisp.js",
+		"build:tsc": "yarn tsc",
+		"build": "yarn build:grammar && yarn build:tsc",
+		"mlisp": "node dist/index.js"
+	}
+}
