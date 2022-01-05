@@ -85,7 +85,7 @@ export class Expression {
 		return new Expression(t, scope => {
 			const fn = exprs[0].eval(scope)
 			const type = getTypeStr(fn)
-			if (type !== 'function' && type !== 'function') {
+			if (type !== 'function') {
 				throw new TypeError(`Unable to call ${fn} as function`)
 			}
 			return (fn as RuntimeFunction).call(exprs.slice(1), scope)

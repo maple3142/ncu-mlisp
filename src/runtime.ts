@@ -74,7 +74,8 @@ export const createDefaultRuntimeScope = () => {
 			if (!vals.every(x => getTypeStr(x) === 'number')) {
 				throw new TypeError('Getting a non number in `/`')
 			}
-			return Math.floor(<number>vals[0] / <number>vals[1])
+			const r = Math.trunc(<number>vals[0] / <number>vals[1])
+			return Object.is(r, -0) ? 0 : r
 		})
 	)
 	scope.set(
@@ -194,7 +195,7 @@ export const createDefaultRuntimeScope = () => {
 			for (let i = 0; i < fnargs.length; i++) {
 				newScope.set(idlist[i], fnargs[i].eval(callerScope))
 			}
-			defexprs.forEach(e => e.eval(newScope))  // define nested function in newscope
+			defexprs.forEach(e => e.eval(newScope)) // define nested function in newscope
 			return fnbody.eval(newScope)
 		})
 	})
